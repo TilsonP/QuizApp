@@ -4,12 +4,14 @@ export class Services{
 
     URL= "https://opentdb.com/api.php"
 
+    /*Consulta de API especifica con parametros variables para proximos usos*/
     async find_questions(amount, difficulty,type){
         let response = await fetch(`${this.URL}?amount=${amount}&difficulty=${difficulty}&type=${type}`)
             .then(response => response.json())
 
         let questions = response["results"]
 
+        /*Mapeo de preguntas obtenidas*/
         if(questions){
             let questionsList = []
             for ( const [key] of Object.entries(questions)){

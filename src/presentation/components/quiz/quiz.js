@@ -49,6 +49,7 @@ export class Quiz extends React.Component{
         }
     }
 
+    /*Trae las preguntas y las envia al estado*/
     async findQuestions(){
         const service = new Services()
         const questions = Object.values(await service.find_questions("10","hard", "boolean"))
@@ -56,6 +57,7 @@ export class Quiz extends React.Component{
         this.setState({questions:questions})
     }
 
+    /*Guarda las respestas a cada pregunta y finaliza el quiz*/
     answer(response) {
         const questions = this.state.questions
 
@@ -76,6 +78,8 @@ export class Quiz extends React.Component{
 
     }
 
+
+    /*Visualiza puntuacion*/
     showResponse() {
         const questions = this.state.questions
 
