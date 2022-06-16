@@ -24,15 +24,15 @@ export class Quiz extends React.Component{
         if (this.state.finish === false){
             return (
                 this.state.questions ?
-                    <div className="questions">
+                    <div id="container" className="questions animation">
                         <div className="category number">Question {this.state.current_question+1}</div>
                         <div className="info">Category:</div>
                         <div className="category">{this.state.questions[this.state.current_question].category}</div>
                         <div className="question">{this.state.questions[this.state.current_question].question}</div>
                         <div className="info">Choose an answer</div>
                         <div className="container_button">
-                            <div onClick={() =>this.answer("True")} className="button true">True</div>
-                            <div onClick={() =>this.answer("False")} className="button false">False</div>
+                            <div onClick={() =>this.answer("True")} id="button" className="button true">True</div>
+                            <div onClick={() =>this.answer("False")} id="button" className="button false">False</div>
                         </div>
                     </div> : <div className="questions"><div className="loader"/></div>
             );
@@ -68,6 +68,12 @@ export class Quiz extends React.Component{
         }
 
         this.setState({questions: questions})
+
+        let animation = document.getElementById('container');
+        animation.addEventListener('click', () => {
+            animation.classList.remove('animation')
+            setTimeout(() => animation.classList.add('animation'), 0)
+        });
 
         this.setState({current_question: this.state.current_question + 1})
 
