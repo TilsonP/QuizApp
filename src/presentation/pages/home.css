@@ -1,0 +1,27 @@
+*{
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.background{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom right, #5BC6F6, #46FF58);
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 80vh;
+    min-height: 400px;
+    max-width: 30%;
+    min-width: 300px;
+    background-color: #ffffff;
+    box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    white-space: unset;
+    color: #707070;
+}
