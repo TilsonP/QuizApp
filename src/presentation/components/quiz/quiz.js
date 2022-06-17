@@ -2,6 +2,7 @@ import React from "react";
 import "./quiz.css";
 import {Services} from "../../../services/services";
 import {Link} from "react-router-dom";
+import {toContainHTML} from "@testing-library/jest-dom/dist/matchers";
 
 export class Quiz extends React.Component{
 
@@ -12,7 +13,8 @@ export class Quiz extends React.Component{
             current_question: 0,
             punctuation: 0,
             finish: false,
-            answers: null
+            answers: null,
+            animations: null,
         }
     }
 
@@ -28,11 +30,11 @@ export class Quiz extends React.Component{
                         <div className="category number">Question {this.state.current_question+1}</div>
                         <div className="info">Category:</div>
                         <div className="category">{this.state.questions[this.state.current_question].category}</div>
-                        <div className="question">{this.state.questions[this.state.current_question].question}</div>
+                        <div className="question">{this.replaceCharacters(this.state.questions[this.state.current_question].question)}</div>
                         <div className="info">Choose an answer</div>
                         <div className="container_button">
-                            <div onClick={() =>this.answer("True")} id="button" className="button true">True</div>
-                            <div onClick={() =>this.answer("False")} id="button" className="button false">False</div>
+                            <button onClick={() =>this.answer("True")} id="button" className="button true">True</button>
+                            <button onClick={() =>this.answer("False")} id="button" className="button false">False</button>
                         </div>
                     </div> : <div className="questions"><div className="loader"/></div>
             );
@@ -67,13 +69,9 @@ export class Quiz extends React.Component{
             this.setState({punctuation:this.state.punctuation+1})
         }
 
-        this.setState({questions: questions})
+        this.controlAnimation()
 
-        let animation = document.getElementById('container');
-        animation.addEventListener('click', () => {
-            animation.classList.remove('animation')
-            setTimeout(() => animation.classList.add('animation'), 0)
-        });
+        this.setState({questions: questions})
 
         this.setState({current_question: this.state.current_question + 1})
 
@@ -82,6 +80,22 @@ export class Quiz extends React.Component{
             this.showResponse()
         }
 
+    }
+
+    replaceCharacters(string){
+        string = string.replace(/&#039;/g,"'")
+        string = string.replace(/&ocirc;/g,"o")
+        string = string.replace(/&quot;/g,"'")
+        string = string.replace(/&Aring;/g,"A")
+        string = string.replace(/&#039;/g,"'")
+        string = string.replace(/&ldquo;/g,'"')
+        return string
+    }
+
+    controlAnimation(){
+        const animation = document.getElementById('container')
+        animation.classList.remove('animation')
+        setTimeout(() => animation.classList.add('animation'), 0)
     }
 
 
@@ -94,7 +108,7 @@ export class Quiz extends React.Component{
         questions.forEach(question =>{
             answersList.push(
                 <div className="answer">
-                    <div>{question.question}</div>
+                    <div>{this.replaceCharacters(question.question)}</div>
                     <div>Correct answer: {question.correct_answer}</div>
                     <div>Your answer: {question.answer}</div>
                     <div className="separate"/>

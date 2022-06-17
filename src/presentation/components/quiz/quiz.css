@@ -4,9 +4,11 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    opacity: 0;
 }
 
 .animation{
+    animation-fill-mode: forwards;
     animation-name: appear;
     animation-duration: 2s;
 }
@@ -26,15 +28,6 @@
     height: 150px;
     font-size: 20px;
     margin: 70px 20px;
-}
-
-@keyframes appear {
-    from{
-        opacity: 0;
-    }
-    to{
-        opacity: 1;
-    }
 }
 
 .container_button{
@@ -93,13 +86,6 @@
     animation: spin 2s linear infinite;
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-
-
 .finish{
     display: flex;
     flex-direction: column;
@@ -134,4 +120,18 @@
 .separate{
     background-color: #707070;
     height: 2px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes appear {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
 }
