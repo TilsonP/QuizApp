@@ -2,7 +2,6 @@ import React from "react";
 import "./quiz.css";
 import {Services} from "../../../services/services";
 import {Link} from "react-router-dom";
-import {toContainHTML} from "@testing-library/jest-dom/dist/matchers";
 
 export class Quiz extends React.Component{
 
